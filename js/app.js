@@ -2,9 +2,18 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { TopComponent } from './components/TopComponent.jsx'
+import reducer from './reducer.js'
+import { GameContainer } from './components/Game.jsx'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { setInitialState } from './actions.js'
+
+const store = createStore(reducer);
+store.dispatch(setInitialState());
 
 ReactDOM.render(
-  <TopComponent />,
+  <Provider store={store}>
+    <GameContainer />
+  </Provider>,
   document.getElementById('react')
 )
