@@ -1,4 +1,36 @@
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 32px;
+  color: #121C2C;
+  margin: 8px auto;
+
+  padding: 10px 0 10px 0;
+  letter-spacing: 8px;
+  font-weight: 500;
+  background-color: #E5E9F1;
+}
+
 .game {
   text-align: center;
   margin: 100px auto;
+}
+
+.grid {
+  display: inline-block;
+  margin: 0px auto;
+}
+
+.table {
+  border-spacing: 6px;
+}
+
+.cell {
+  background-color: #DFE7D8;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+
+  font-family: 'Open Sans', sans-serif;
+  font-size: 32px;
+  color: #121C2C;
 }

@@ -8,6 +8,9 @@ export class Game extends React.Component {
   render() {
     return (
       <div className="game">
+        <h1>
+          2048
+        </h1>
         <Grid
           currentGrid={this.props.currentGrid}
         />

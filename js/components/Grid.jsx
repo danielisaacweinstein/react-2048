@@ -9,7 +9,7 @@ export class Grid extends React.Component {
     let currentGrid = this.props.currentGrid;
 
     let table = (
-      <table>
+      <table className="table">
         <tbody>
         {
           currentGrid.map((row, rowIndex) => {
@@ -37,10 +37,9 @@ export class Grid extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="grid">
         {this.getGrid()}
       </div>
     )
   }
-
 }
