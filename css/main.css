@@ -1,12 +1,11 @@
 h1 {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 32px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 49px;
   color: #121C2C;
   margin: 8px auto;
-
-  padding: 10px 0 10px 0;
-  letter-spacing: 8px;
-  font-weight: 500;
+  letter-spacing: 20px;
+  padding: 10px 0 10px 20px; /* Left padding recentering letter-spacing */
+  font-weight: 700;
   background-color: #E5E9F1;
 }
 
@@ -30,7 +29,7 @@ h1 {
   width: 50px;
   height: 50px;
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 32px;
   color: #121C2C;
 }
