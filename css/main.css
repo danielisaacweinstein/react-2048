@@ -4,7 +4,10 @@ h1 {
   color: #121C2C;
   margin: 8px auto;
   letter-spacing: 20px;
-  padding: 10px 0 10px 20px; /* Left padding recentering letter-spacing */
+
+  /* Left padding recentering letter-spacing */
+  padding: 10px 0 10px 20px;
+  
   font-weight: 700;
   background-color: #E5E9F1;
 }

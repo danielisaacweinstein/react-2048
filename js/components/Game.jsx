@@ -3,14 +3,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Grid } from './Grid.jsx'
+import { shift, setInitialState } from '../actions.js'
 
 export class Game extends React.Component {
+  componentWillMount() {
+    document.onkeydown = ((e) => {
+      this.props.dispatch(shift(e.keyCode));
+    });
+  }
+
   render() {
+    console.log("Render Game")
     return (
       <div className="game">
-        <h1>
-          2048
-        </h1>
+        <h1>2048</h1>
         <Grid
           currentGrid={this.props.currentGrid}
         />
@@ -20,6 +26,7 @@ export class Game extends React.Component {
 }
 
 function mapStateToProps(state) {
+  // debugger;
   return {
     currentGrid: state.get('currentGrid')
   }

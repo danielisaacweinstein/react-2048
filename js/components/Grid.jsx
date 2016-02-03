@@ -6,17 +6,17 @@ import { Cell } from './Cell.jsx'
 export class Grid extends React.Component {
 
   getGrid() {
-    let currentGrid = this.props.currentGrid;
+    var currentGrid = this.props.currentGrid;
 
-    let table = (
+    var table = (
       <table className="table">
         <tbody>
         {
-          currentGrid.map((row, rowIndex) => {
+          currentGrid.map(function(row, rowIndex) {
             return (
               <tr key={rowIndex}>
-                {row.map((cell, cellIndex) => {
-                  let cellContent = currentGrid.getIn([rowIndex, cellIndex])
+                {row.map(function(cell, cellIndex) {
+                  var cellContent = currentGrid.getIn([rowIndex, cellIndex])
                   return (
                     <Cell
                       key={cellIndex}
