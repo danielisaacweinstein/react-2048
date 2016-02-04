@@ -101,17 +101,10 @@ function getCollapser(direction) {
 export function getCollapsedGrid(state, incomingData) {
   var grid = state.get('currentGrid');
   var keyInput = incomingData.keyCode;
-  var directionCodes = Object.keys(DIRECTIONS).map(function(key) {
-    return DIRECTIONS[key];
-  });
-
-  var validDirection = directionCodes.includes(keyInput);
-
-  if (validDirection) {
-    var collapse = getCollapser(keyInput);
-    grid = collapse(grid);
-    state = state.set('currentGrid', grid);
-  }
+  var collapse = getCollapser(keyInput);
+  
+  grid = collapse(grid);
+  state = state.set('currentGrid', grid);
 
   return state;
 }
