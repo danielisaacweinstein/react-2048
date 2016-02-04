@@ -1,12 +1,28 @@
 import * as Immutable from 'immutable'
 
+function isGridCollapsable(grid) {
+
+}
+
+function gridHasFreeSpace(grid) {
+  var hasFreeSpace = grid.reduce(function(foundInGridYet, row) {
+    var isSpaceInRow = row.reduce(function(spaceInRowYet, cell) {
+      var isCellFree = cell === undefined;
+      return isCellFree || false;
+    }, false);
+    return isSpaceInRow || false;
+  }, false);
+
+  return hasFreeSpace;
+}
+
 function getRandomFreeIndex(grid) {
   var xIndex, yIndex;
 
   do {
-    xIndex = Math.floor(Math.random() * grid.length);
-    yIndex = Math.floor(Math.random() * grid.length);    
-  } while (grid.getIn([xIndex, yIndex]) !== undefined)
+    xIndex = Math.floor(Math.random() * grid.size);
+    yIndex = Math.floor(Math.random() * grid.size);    
+  } while (grid.getIn([xIndex, yIndex]) !== undefined && gridHasFreeSpace(grid))
 
   return [xIndex, yIndex];
 }
