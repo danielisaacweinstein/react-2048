@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable'
-import { DIRECTIONS } from './helpers.js'
+import { DIRECTIONS, rotate90 } from './helpers.js'
 
 function shiftGrid(grid) {
   var newGrid = grid.map(function(row, rowIndex) {
@@ -49,21 +49,6 @@ function fillGrid(grid) {
   return newGrid;
 }
 
-function rotate90(grid) {
-  var lines = [];
-
-  for (var i = 0; i < grid.size; i++) {
-    var line = [];
-    
-    for (var j = grid.size - 1; j >= 0; j--) {
-      line.push(grid.getIn([j, i]));
-    }
-    lines.push(line);
-  }
- 
-  return Immutable.fromJS(lines);
-}
-
 function getCollapser(direction) {
   var firstRotationCount, secondRotationCount;
 
@@ -102,7 +87,7 @@ export function getCollapsedGrid(state, incomingData) {
   var grid = state.get('currentGrid');
   var keyInput = incomingData.keyCode;
   var collapse = getCollapser(keyInput);
-  
+
   grid = collapse(grid);
   state = state.set('currentGrid', grid);
 

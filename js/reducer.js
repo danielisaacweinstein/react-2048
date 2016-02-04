@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable'
 import { getCollapsedGrid } from './collapseLogic.js'
-import { DIRECTIONS } from './helpers.js'
+import { DIRECTIONS, doesGridHaveFreeSpace } from './helpers.js'
 import { getInitialConfiguration,
          addNumberToGrid } from './gameflowLogic.js'
 
@@ -15,12 +15,13 @@ function getInitialState(state) {
 function getShiftedState(state, incomingData) {
   var keyInput = incomingData.keyCode;
   var directionCodes = Object.keys(DIRECTIONS).map(function(key) {
-    return DIRECTIONS[key]
+    return DIRECTIONS[key];
   });
 
   var validDirection = directionCodes.includes(keyInput);
+  var gridHasFreeSpace = doesGridHaveFreeSpace(state.get('currentGrid'));
 
-  if (validDirection) {
+  if (validDirection && gridHasFreeSpace) {
     state = getCollapsedGrid(state, incomingData);
     state = addNumberToGrid(state);
   }
