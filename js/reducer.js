@@ -1,14 +1,10 @@
 import * as Immutable from 'immutable'
 import { getCollapsedGrid } from './collapseLogic.js'
+import { getInitialConfiguration } from './gameflowLogic.js'
 
 function getInitialState(state) {
   var initialState = Immutable.fromJS({
-    currentGrid: [
-      [2,2,2,2,],
-      [ , ,2, ,],
-      [8, , ,8,],
-      [ ,4, , ,]
-    ]
+    currentGrid: getInitialConfiguration()
   });
 
   return state.merge(initialState);
