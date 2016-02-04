@@ -1,6 +1,7 @@
 import * as Immutable from 'immutable'
 import { getCollapsedGrid } from './collapseLogic.js'
-import { getInitialConfiguration } from './gameflowLogic.js'
+import { getInitialConfiguration,
+         addNumberToGrid } from './gameflowLogic.js'
 
 function getInitialState(state) {
   var initialState = Immutable.fromJS({
@@ -15,7 +16,9 @@ function reducer(state = Immutable.Map(), action) {
     case 'SET_INITIAL_STATE':
       return getInitialState(state);
     case 'SHIFT':
-      return getCollapsedGrid(state, action.data);
+      state = getCollapsedGrid(state, action.data);
+      state = addNumberToGrid(state);
+      return state;
   }
   return state;
 }
