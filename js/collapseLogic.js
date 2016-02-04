@@ -103,11 +103,14 @@ function getCollapser(direction) {
 
 export function getCollapsedGrid(state, incomingData) {
   var grid = state.get('currentGrid');
-  var direction = incomingData.keyCode;
-  var collapse = getCollapser(direction);
+  var keyInput = incomingData.keyCode;
+  var validDirection = [40, 37, 39, 38].includes(keyInput);
 
-  grid = collapse(grid);
-  state = state.set('currentGrid', grid);
+  if (validDirection) {
+    var collapse = getCollapser(keyInput);
+    grid = collapse(grid);
+    state = state.set('currentGrid', grid);
+  }
 
   return state;
 }
