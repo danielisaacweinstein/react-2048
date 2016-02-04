@@ -1,4 +1,5 @@
 import * as Immutable from 'immutable'
+import { DIRECTIONS } from './helpers.js'
 
 function shiftGrid(grid) {
   var newGrid = grid.map(function(row, rowIndex) {
@@ -64,21 +65,18 @@ function rotate90(grid) {
 }
 
 function getCollapser(direction) {
-  var [down, left, right, up] = [40, 37, 39, 38];
+  var firstRotationCount, secondRotationCount;
 
-  var firstRotationCount;
-  var secondRotationCount;
-
-  if (direction === left) {
+  if (direction === DIRECTIONS.left) {
     firstRotationCount = 0;
     secondRotationCount = 0;
-  } else if (direction === right) {
+  } else if (direction === DIRECTIONS.right) {
     firstRotationCount = 2;
     secondRotationCount = 2;
-  } else if (direction === up) {
+  } else if (direction === DIRECTIONS.up) {
     firstRotationCount = 3;
     secondRotationCount = 1;
-  } else if (direction === down) {
+  } else if (direction === DIRECTIONS.down) {
     firstRotationCount = 1;
     secondRotationCount = 3;
   }
@@ -88,7 +86,6 @@ function getCollapser(direction) {
       grid = rotate90(grid);
     }
 
-    grid = shiftGrid(grid);
     grid = collapseGrid(grid);
     grid = shiftGrid(grid);
     grid = fillGrid(grid);
@@ -104,7 +101,11 @@ function getCollapser(direction) {
 export function getCollapsedGrid(state, incomingData) {
   var grid = state.get('currentGrid');
   var keyInput = incomingData.keyCode;
-  var validDirection = [40, 37, 39, 38].includes(keyInput);
+  var directionCodes = Object.keys(DIRECTIONS).map(function(key) {
+    return DIRECTIONS[key];
+  });
+
+  var validDirection = directionCodes.includes(keyInput);
 
   if (validDirection) {
     var collapse = getCollapser(keyInput);
