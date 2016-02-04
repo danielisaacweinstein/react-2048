@@ -13,7 +13,6 @@ export class Game extends React.Component {
   }
 
   render() {
-    console.log("Render Game")
     return (
       <div className="game">
         <h1>2048</h1>
@@ -26,7 +25,6 @@ export class Game extends React.Component {
 }
 
 function mapStateToProps(state) {
-  // debugger;
   return {
     currentGrid: state.get('currentGrid')
   }
