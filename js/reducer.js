@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable'
-import { getCollapsedGrid } from './collapseLogic.js'
+import { getCollapsedGrid, isGridCollapsable } from './collapseLogic.js'
 import { DIRECTIONS, doesGridHaveFreeSpace } from './helpers.js'
 import { getInitialConfiguration,
          addNumberToGrid } from './gameflowLogic.js'
@@ -19,12 +19,24 @@ function getShiftedState(state, incomingData) {
   });
 
   var validDirection = directionCodes.includes(keyInput);
-  var gridHasFreeSpace = doesGridHaveFreeSpace(state.get('currentGrid'));
+  var hasFreeSpace = doesGridHaveFreeSpace(state.get('currentGrid'));
+  var isCollapsable = isGridCollapsable(state.get('currentGrid'));
 
   // TODO: add and define isCollapsable for following conditional
-  if (validDirection && gridHasFreeSpace) {
+
+  console.log("\n\n")
+  console.log("validDirection?");
+  console.log(validDirection);
+  console.log("hasFreeSpace?");
+  console.log(hasFreeSpace);
+  console.log("isCollapsable?");
+  console.log(isCollapsable);
+
+  if (validDirection && (hasFreeSpace || isCollapsable)) {
     state = getCollapsedGrid(state, incomingData);
     state = addNumberToGrid(state);
+  } else {
+    console.log("Grid can't collapse!");
   }
 
   return state;

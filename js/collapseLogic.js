@@ -13,10 +13,6 @@ function shiftGrid(grid) {
   return newGrid;
 }
 
-function isGridCollapsable(grid) {
-  
-}
-
 function collapseGrid(grid) {
   var newGrid = grid.map(function(row, rowIndex) {
     var newRow = row.reduce(function(currentRow, currentCell, index, row) {
@@ -88,7 +84,7 @@ function getCollapser(direction) {
 }
 
 export function getCollapsedGrid(state, incomingData) {
-  var grid = state.get('currentGrid');
+  var grid     = state.get('currentGrid');
   var keyInput = incomingData.keyCode;
   var collapse = getCollapser(keyInput);
 
@@ -96,4 +92,20 @@ export function getCollapsedGrid(state, incomingData) {
   state = state.set('currentGrid', grid);
 
   return state;
+}
+
+
+export function isGridCollapsable(grid) {
+  var firstRotation  = rotate90(grid);
+  var secondRotation = rotate90(firstRotation);
+  var thirdRotation  = rotate90(secondRotation);
+
+  var notCollapsable = (Immutable.is(grid, firstRotation) &&
+                        Immutable.is(grid, secondRotatio) &&
+                        Immutable.is(grid, thirdRotation))
+
+  console.log("notCollapsable?");
+  console.log(notCollapsable);
+
+  return !notCollapsable;
 }
