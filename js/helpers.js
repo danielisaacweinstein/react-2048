@@ -22,10 +22,6 @@ export function rotate90(grid) {
   return Immutable.fromJS(lines);
 }
 
-export function isGridCollapsable(grid) {
-
-}
-
 export function doesGridHaveFreeSpace(grid) {
   var hasFreeSpace = grid.reduce(function(foundSpaceInGridYet, row) {
     var isSpaceInRow = row.reduce(function(foundSpaceInRowYet, cell) {

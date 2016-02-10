@@ -13,6 +13,10 @@ function shiftGrid(grid) {
   return newGrid;
 }
 
+function isGridCollapsable(grid) {
+  
+}
+
 function collapseGrid(grid) {
   var newGrid = grid.map(function(row, rowIndex) {
     var newRow = row.reduce(function(currentRow, currentCell, index, row) {

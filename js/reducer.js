@@ -21,6 +21,7 @@ function getShiftedState(state, incomingData) {
   var validDirection = directionCodes.includes(keyInput);
   var gridHasFreeSpace = doesGridHaveFreeSpace(state.get('currentGrid'));
 
+  // TODO: add and define isCollapsable for following conditional
   if (validDirection && gridHasFreeSpace) {
     state = getCollapsedGrid(state, incomingData);
     state = addNumberToGrid(state);
