@@ -36,3 +36,47 @@ h1 {
   font-size: 32px;
   color: #121C2C;
 }
+
+.cell2 {
+  background-color: #ECF2E6;
+}
+
+.cell4 {
+  background-color: #DBE9D0;
+}
+
+.cell8 {
+  background-color: #C2D5B3;
+}
+
+.cell16 {
+  background-color: #C7F2A5;
+}
+
+.cell32 {
+  background-color: #9BDBD9;
+}
+
+.cell64 {
+  background-color: #92CBC9;
+}
+
+.cell128 {
+  background-color: #92A3CB;
+}
+
+.cell256 {
+  background-color: #D179E5;
+}
+
+.cell512 {
+  background-color: #D001FF;
+}
+
+.cell1024 {
+  background-color: #FF01AF;
+}
+
+.cell2048 {
+  background-color: #FF4D9E;
+}
