@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable'
-import { getCollapsedGrid, isGridCollapsable } from './collapseLogic.js'
+import { getCollapsedGrid, canDirectionCollapse } from './collapseLogic.js'
 import { DIRECTIONS, doesGridHaveFreeSpace } from './helpers.js'
 import { getInitialConfiguration,
          addNumberToGrid } from './gameflowLogic.js'
@@ -13,30 +13,23 @@ function getInitialState(state) {
 }
 
 function getShiftedState(state, incomingData) {
-  var keyInput = incomingData.keyCode;
+  var input = incomingData.keyCode;
+  var grid = state.get('currentGrid');
+
+  // Workaround for valid keyCodes; Object.values() not yet supported in Chrome.
   var directionCodes = Object.keys(DIRECTIONS).map(function(key) {
     return DIRECTIONS[key];
   });
 
-  var validDirection = directionCodes.includes(keyInput);
-  var hasFreeSpace = doesGridHaveFreeSpace(state.get('currentGrid'));
-  var isCollapsable = isGridCollapsable(state.get('currentGrid'));
+  var validDirection = directionCodes.includes(input);
+  var canCollapse = validDirection && canDirectionCollapse(grid, input);
+  var hasFreeSpace = doesGridHaveFreeSpace(grid);
 
-  // TODO: add and define isCollapsable for following conditional
-
-  console.log("\n\n")
-  console.log("validDirection?");
-  console.log(validDirection);
-  console.log("hasFreeSpace?");
-  console.log(hasFreeSpace);
-  console.log("isCollapsable?");
-  console.log(isCollapsable);
-
-  if (validDirection && (hasFreeSpace || isCollapsable)) {
+  if (canCollapse || hasFreeSpace) {
     state = getCollapsedGrid(state, incomingData);
     state = addNumberToGrid(state);
   } else {
-    console.log("Grid can't collapse!");
+    debugger;
   }
 
   return state;
