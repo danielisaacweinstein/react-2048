@@ -118,27 +118,29 @@ export function canDirectionCollapse(grid, input) {
   var collapsedGrid = collapse(rotatedGrid);
   var collapsable = !Immutable.is(rotatedGrid, collapsedGrid);
 
+  console.log(collapsable)
+
   return collapsable ? true : false;
 }
 
-// export function isGridCollapsable(grid) {
-//   var collapse = getCollapser(DIRECTIONS.left);
+export function isGridCollapsable(grid) {
+  var collapse = getCollapser(DIRECTIONS.left);
 
-//   var gridCollapsed  = collapse(grid);
+  var gridCollapsed  = collapse(grid);
   
-//   var firstRotation  = rotate90(grid);
-//   var firstRotationCollapsed = collapse(firstRotation);
+  var firstRotation  = rotate90(grid);
+  var firstRotationCollapsed = collapse(firstRotation);
 
-//   var secondRotation = rotate90(firstRotation);
-//   var secondRotationCollapsed = collapse(secondRotation);
+  var secondRotation = rotate90(firstRotation);
+  var secondRotationCollapsed = collapse(secondRotation);
 
-//   var thirdRotation  = rotate90(secondRotation);
-//   var thirdRotationCollapsed = collapse(thirdRotation);
+  var thirdRotation  = rotate90(secondRotation);
+  var thirdRotationCollapsed = collapse(thirdRotation);
 
-//   var notCollapsable = (Immutable.is(grid, gridCollapsed) &&
-//                         Immutable.is(firstRotation, firstRotationCollapsed) &&
-//                         Immutable.is(secondRotation, secondRotationCollapsed) &&
-//                         Immutable.is(thirdRotation, thirdRotationCollapsed))
+  var notCollapsable = (Immutable.is(grid, gridCollapsed) &&
+                        Immutable.is(firstRotation, firstRotationCollapsed) &&
+                        Immutable.is(secondRotation, secondRotationCollapsed) &&
+                        Immutable.is(thirdRotation, thirdRotationCollapsed))
 
-//   return !notCollapsable;
-// }
+  return !notCollapsable;
+}
