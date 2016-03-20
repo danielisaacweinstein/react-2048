@@ -16,7 +16,7 @@ function getInitialState(state) {
 }
 
 function getShiftedState(state, incomingData) {
-  var input = incomingData.keyCode;
+  var keyCode = incomingData.keyCode;
   var grid = state.get('currentGrid');
 
   // Workaround for valid keyCodes; Object.values() not yet supported in Chrome.
@@ -24,28 +24,23 @@ function getShiftedState(state, incomingData) {
     return DIRECTIONS[key];
   });
 
-  var validDirection = directionCodes.includes(input);
-  var canCollapseInDirection = validDirection && canDirectionCollapse(grid, input);
+  // If input is not a valid direction, return state without manipulation.
+  if (!directionCodes.includes(keyCode)) { return state; }
+
+  var canCollapseGivenDirection = canDirectionCollapse(grid, keyCode);
+  var canCollapseAnyDirection = isGridCollapsable(grid);
   var hasFreeSpace = doesGridHaveFreeSpace(grid);
-  var isCollapsable = isGridCollapsable(grid);
 
-  // if (canCollapseInDirection) {
-  //   // console.log("collapse")
-  //   state = getCollapsedGrid(state, incomingData);
-  // }
-
-  if (isCollapsable && canCollapseInDirection) {
-    state = getCollapsedGrid(state, incomingData)
-  }
-
-
-  if (hasFreeSpace) {
-    // console.log("Add number")
+  if (canCollapseGivenDirection) {
+    state = getCollapsedGrid(state, keyCode);
     state = addNumberToGrid(state);
-  }
 
-  if (!isCollapsable) {
-    debugger;
+    canCollapseAnyDirection = isGridCollapsable(grid);
+
+    // TODO: state = canCollapseAnyDirection ? state : setGameOver(state);
+    return state;
+  } else if (canCollapseAnyDirection) {
+    return state;
   }
 
   return state;

@@ -83,10 +83,9 @@ function getCollapser(direction) {
   }
 }
 
-export function getCollapsedGrid(state, incomingData) {
+export function getCollapsedGrid(state, keyCode) {
   var grid     = state.get('currentGrid');
-  var keyInput = incomingData.keyCode;
-  var collapse = getCollapser(keyInput);
+  var collapse = getCollapser(keyCode);
 
   grid = collapse(grid);
   state = state.set('currentGrid', grid);
@@ -101,12 +100,16 @@ export function canDirectionCollapse(grid, input) {
   switch (input) {
     case 37: // Left
       rotationCount = 0;
+      break;
     case 38: // Up
       rotationCount = 1;
+      break;
     case 39: // Right
       rotationCount = 2;
+      break;
     case 40: // Down
       rotationCount = 3;
+      break;
   }
 
   var rotatedGrid = grid;
@@ -117,8 +120,6 @@ export function canDirectionCollapse(grid, input) {
 
   var collapsedGrid = collapse(rotatedGrid);
   var collapsable = !Immutable.is(rotatedGrid, collapsedGrid);
-
-  console.log(collapsable)
 
   return collapsable ? true : false;
 }
