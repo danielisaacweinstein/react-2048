@@ -9,7 +9,8 @@ import { getCollapsedGrid,
 
 function getInitialState(state) {
   var initialState = Immutable.fromJS({
-    currentGrid: getInitialConfiguration()
+    currentGrid: getInitialConfiguration(),
+    gameOver: false
   });
 
   return state.merge(initialState);
@@ -36,11 +37,13 @@ function getShiftedState(state, incomingData) {
     state = addNumberToGrid(state);
 
     canCollapseAnyDirection = isGridCollapsable(grid);
+    state = canCollapseAnyDirection ? state : state.set('gameOver', true);
+  } else if (!hasFreeSpace && !canCollapseAnyDirection) {
+    state = state.set('gameOver', true);
+  }
 
-    // TODO: state = canCollapseAnyDirection ? state : setGameOver(state);
-    return state;
-  } else if (canCollapseAnyDirection) {
-    return state;
+  if (state.get('gameOver') == true) {
+    console.log('game is over!');
   }
 
   return state;
