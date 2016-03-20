@@ -3,6 +3,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Grid } from './Grid.jsx'
+import { ControlPanel } from './ControlPanel.jsx'
 import { shift, setInitialState } from '../actions.js'
 
 export class Game extends React.Component {
@@ -18,6 +19,9 @@ export class Game extends React.Component {
         <h1>2048</h1>
         <Grid
           currentGrid={this.props.currentGrid}
+        />
+        <ControlPanel
+          
         />
       </div>
     );

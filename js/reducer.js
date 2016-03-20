@@ -33,12 +33,14 @@ function getShiftedState(state, incomingData) {
   var hasFreeSpace = doesGridHaveFreeSpace(grid);
 
   if (canCollapseGivenDirection) {
+    console.log("Given");
     state = getCollapsedGrid(state, keyCode);
     state = addNumberToGrid(state);
 
     canCollapseAnyDirection = isGridCollapsable(grid);
     state = canCollapseAnyDirection ? state : state.set('gameOver', true);
   } else if (!hasFreeSpace && !canCollapseAnyDirection) {
+    console.log("Any");
     state = state.set('gameOver', true);
   }
 
